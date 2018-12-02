@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.btnOpen = new System.Windows.Forms.Button();
+            this.chkExecuteWhenDone = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // btnOpen
@@ -41,21 +42,34 @@
             this.btnOpen.UseVisualStyleBackColor = true;
             this.btnOpen.Click += new System.EventHandler(this.BtnOpen_Click);
             // 
+            // chkExecuteWhenDone
+            // 
+            this.chkExecuteWhenDone.AutoSize = true;
+            this.chkExecuteWhenDone.Location = new System.Drawing.Point(24, 88);
+            this.chkExecuteWhenDone.Name = "chkExecuteWhenDone";
+            this.chkExecuteWhenDone.Size = new System.Drawing.Size(108, 16);
+            this.chkExecuteWhenDone.TabIndex = 1;
+            this.chkExecuteWhenDone.Text = "完成后立即执行";
+            this.chkExecuteWhenDone.UseVisualStyleBackColor = true;
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Controls.Add(this.chkExecuteWhenDone);
             this.Controls.Add(this.btnOpen);
             this.Name = "FrmMain";
             this.Text = "Encodeasy";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.Button btnOpen;
+        private System.Windows.Forms.CheckBox chkExecuteWhenDone;
     }
 }
 

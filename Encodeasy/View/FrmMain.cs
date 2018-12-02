@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -42,6 +43,10 @@ namespace Encodeasy.View
             OpenFileDialog dlg = new OpenFileDialog{Multiselect = true, Filter = @"MP4文件|*.mp4" };
             if(DialogResult.OK == dlg.ShowDialog())
             {
+                // 删除临时文件
+                if(Directory.Exists(tempDir)) { Directory.Delete(tempDir, true);}
+                Directory.CreateDirectory(tempDir);
+
                 files.AddRange(dlg.FileNames.Select(file => new MediaFile {Path = file}));
                 int idx = 0;
                 foreach(MediaFile file in files)
@@ -51,8 +56,6 @@ namespace Encodeasy.View
 
                     // 源
                     string srcFile = Path.Combine(tempDir, string.Format($@"src{idx}.mp4"));
-                    tempFiles.Add(srcFile);
-                    File.Delete(srcFile);
                     File.Copy(file.Path, srcFile);
 
                     // 抽取
@@ -95,6 +98,10 @@ namespace Encodeasy.View
 
                 // 生成BAT文件
                 FileTool.CreateAndWriteText(workBat,build.ToString(), Encoding.Default);
+                if(chkExecuteWhenDone.Checked)
+                {
+                    Process.Start(workBat);
+                }
 
                 // 等待执行并删除临时文件
 
