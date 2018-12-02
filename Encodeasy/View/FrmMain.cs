@@ -20,7 +20,7 @@ namespace Encodeasy.View
         private const string CMD_ExtractMp4_Audio = @"ffmpeg -i ""##input##"" -acodec copy -vn ""##output##""";
         private const string CMD_HandBrake = @"HandBrake.exe --preset-import-file ""##preset##"" --queue-import-file ""##input##""";
         private const string CMD_MergeMKV = @"mkvmerge -o ""##output##"" ""##v_input##"" ""##a_input##""";
-        private const string CMD_VapourSynthAndX265 = @"vspipe.exe ""##input##"" --y4m - | x265-10bit_asuna --y4m -D 10 --preset slower --tune lp++ --ctu 32 --crf 18 --pbratio 1.2 --no-sao --me 3 --subme 4 --merange 44 --limit-tu 4 --b-intra --no-rect --no-amp --ref 4 --weightb --keyint 360 --min-keyint 1 --bframes 6 --aq-mode 3 --aq-strength 0.7 --rd 4 --psy-rd 1.5 --psy-rdoq 1.2 --rdoq-level 2 --no-open-gop --rc-lookahead 80 --scenecut 40 --qcomp 0.65 --no-strong-intra-smoothing --rskip --output ""##output##""";
+        private const string CMD_VapourSynthAndX265 = @"vspipe.exe ""##input##"" --y4m - | x265-10bit_asuna --y4m -D 10 --preset slower --tune lp++ --ctu 32 --crf 18 --pbratio 1.2 --no-sao --me 3 --subme 4 --merange 44 --limit-tu 4 --b-intra --no-rect --no-amp --ref 4 --weightb --keyint 360 --min-keyint 1 --bframes 6 --aq-mode 3 --aq-strength 0.7 --rd 4 --psy-rd 1.5 --psy-rdoq 1.2 --rdoq-level 2 --no-open-gop --rc-lookahead 80 --scenecut 40 --qcomp 0.65 --no-strong-intra-smoothing --rskip --output ""##output##"" -";
         public FrmMain()
         {
             InitializeComponent();
@@ -52,6 +52,7 @@ namespace Encodeasy.View
                     // 源
                     string srcFile = Path.Combine(tempDir, string.Format($@"src{idx}.mp4"));
                     tempFiles.Add(srcFile);
+                    File.Delete(srcFile);
                     File.Copy(file.Path, srcFile);
 
                     // 抽取
